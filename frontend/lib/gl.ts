@@ -24,7 +24,7 @@ export async function read(fn: string, args: any[] = []) {
   return c.readContract({ address: ADDRESS, functionName: fn, args });
 }
 export async function write(account: string, fn: string, args: any[], value = BigInt(0)) {
-  const c: any = createClient({ chain: CHAIN, account });
+  const c: any = createClient({ chain: CHAIN, account: account as any });
   const hash = await c.writeContract({ address: ADDRESS, functionName: fn, args, value });
   return c.waitForTransactionReceipt({ hash, status: "ACCEPTED", retries: 200 });
 }
